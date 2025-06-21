@@ -1002,6 +1002,7 @@ export class NewModelValidator {
   public result: SwaggerExampleErrorDetail[] = [];
   public constructor(public specPath: string) {
     const container = inversifyGetContainer();
+    container.bind(SwaggerExampleValidator).toSelf();
     this.validator = inversifyGetInstance(SwaggerExampleValidator, {
       ...defaultOpts,
       container,
