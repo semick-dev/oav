@@ -213,6 +213,11 @@ export class LiveValidator {
       ...this.options,
       loadSuppression: this.options.loadSuppression ?? Object.keys(apiValidationErrors),
     });
+
+    if (!this.loader) {
+      throw new Error("LiveValidatorLoader failed to initialize.");
+    }
+
     this.loader.logging = this.logging;
 
     // re-set the transform context after set the logging function

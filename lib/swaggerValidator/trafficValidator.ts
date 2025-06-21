@@ -138,6 +138,9 @@ export class TrafficValidator {
       loadSuppression: Object.keys(apiValidationErrors),
     });
 
+    if (!this.loader) {
+      throw new Error("TrafficValidatorLoader failed to initialize.");
+    }
     const swaggerPaths = this.liveValidator.swaggerList;
     while (swaggerPaths.length > 0) {
       const swaggerPath = swaggerPaths.shift()!;
@@ -177,6 +180,9 @@ export class TrafficValidator {
     };
     this.swaggerLoader = inversifyGetInstance(SwaggerLoader, swaggerOpts);
 
+    if (!this.swaggerLoader) {
+      throw new Error("SwaggerLoader failed to initialize.");
+    }
     try {
       for (const trafficFile of this.trafficFiles) {
         payloadFilePath = trafficFile;
