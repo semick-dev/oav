@@ -295,7 +295,7 @@ export class XMsExampleExtractor {
           this.extractOne(relativeExamplesPath, outputExamples, api, recordingFileName);
           log.info(`Writing updated swagger with x-ms-examples at ${outputSwagger}`);
           fs.writeFileSync(outputSwagger, JSON.stringify(api, null, 2));
-        } catch (err) {
+        } catch (err: any) {
           accErrors[recordingFileName] = err.toString();
           log.warn(`Error processing recording file: "${recordingFileName}"`);
           log.warn(`Error: "${err.toString()} "`);
@@ -316,7 +316,7 @@ export class XMsExampleExtractor {
   private mkdirSync(dir: string): void {
     try {
       fs.mkdirSync(dir);
-    } catch (e) {
+    } catch (e: any) {
       if (e.code !== "EEXIST") {
         throw e;
       }

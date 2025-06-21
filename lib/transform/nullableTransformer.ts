@@ -30,7 +30,7 @@ export const nullableTransformer: GlobalTransformer = {
             aProperty.type === "object"
           );
         }
-      } catch (e) {
+      } catch (e: any) {
         if (logging) {
           logging(
             `Fail to transform ${sch}. ErrorMessage:${e?.message};ErrorStack:${e?.stack}.`,
@@ -53,7 +53,7 @@ export const nullableTransformer: GlobalTransformer = {
             sch.items = transformNullable(sch.items, jsonLoader);
           }
         }
-      } catch (e) {
+      } catch (e: any) {
         if (logging) {
           logging(
             `Fail to transform ${sch}. ErrorMessage:${e?.message};ErrorStack:${e?.stack}.`,

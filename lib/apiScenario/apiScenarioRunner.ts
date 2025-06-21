@@ -181,7 +181,7 @@ export class ApiScenarioRunner {
         for (const step of scenario.steps) {
           await this.executeStep(step, scenarioEnv, this.scope);
         }
-      } catch (e) {
+      } catch (e: any) {
         throw new Error(
           `Failed to execute scenario: ${scenario.scenario}: ${e.message} \n${e.stack}`
         );
@@ -208,7 +208,7 @@ export class ApiScenarioRunner {
           await this.executeArmRoleAssignmentStep(step, stepEnv);
           break;
       }
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`Failed to execute step ${step.step}: ${e.message} \n${e.stack}`);
     }
   }

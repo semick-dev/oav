@@ -58,7 +58,7 @@ export class SuppressionLoader implements Loader<void, SwaggerSpec> {
         }
         applySuppression(spec, item);
       }
-    } catch (e) {
+    } catch (e: any) {
       const msg = `Error in loading suppression from readme:${readmePath}.\nDetails:${e.message}\n${e.stack}`;
       throw new Error(msg);
     }

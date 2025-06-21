@@ -353,7 +353,7 @@ export class CoverageView {
           }
         }
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(`Failed in prepareDataForRendering with err:${e?.stack};message:${e?.message}`);
     }
   }

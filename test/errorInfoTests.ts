@@ -21,7 +21,7 @@ describe("error info", () => {
         r.schemaUrl,
         "./test/modelValidation/swaggers/specification/errorInfo/apimusers.json"
       );
-    } catch (e) {
+    } catch (e: any) {
       assert.fail(e);
     }
   });

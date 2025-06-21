@@ -73,7 +73,7 @@ export const discriminatorTransformer: GlobalTransformer = {
           copyInfo(baseSch, baseSch.discriminatorMap);
         }
         baseSch.discriminatorMap[discriminatorValue] = { $ref } as unknown as Schema;
-      } catch (e) {
+      } catch (e: any) {
         if (logging) {
           logging(
             `Fail to transform ${sch}. ErrorMessage:${e?.message};ErrorStack:${e?.stack}.`,

@@ -105,7 +105,7 @@ export class SwaggerExampleValidator {
           }
         },
       });
-    } catch (e) {
+    } catch (e: any) {
       log.error(`validateOperations - ErrorMessage:${e?.message}.ErrorStack:${e?.stack}`);
       throw e;
     }
@@ -447,7 +447,7 @@ export class SwaggerExampleValidator {
         skipResolveRef
       )) as unknown as SwaggerSpec;
       this.swagger._filePath = swaggerFilePath;
-    } catch (e) {
+    } catch (e: any) {
       if (typeof e.kind === "string") {
         const ex = e as ParseError;
         const errInfo = getOavErrorMeta("JSON_PARSING_ERROR", { details: ex.code });
@@ -669,7 +669,7 @@ export class SwaggerExampleValidator {
         } else {
           break;
         }
-      } catch (e) {
+      } catch (e: any) {
         let isContinue = false;
         // the jsonRef will include non-existed path, so it needs to walk back to
         // exclude the unexisted path

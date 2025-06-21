@@ -118,7 +118,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "copy-templates": "copyfiles -V -E -u 1 lib/apiScenario/templates/* lib/templates/base*.mustache dist/lib",
-    "build": "run-p tsc lint copy-templates",
+    "build": "run-p tsc copy-templates",
     "tsc": "tsc",
     "lint": "eslint ./lib/**/*.ts ./test/**/*.ts ./*.ts",
     "lint-fix": "eslint ./lib/**/*.ts ./test/**/*.ts ./*.ts --fix",

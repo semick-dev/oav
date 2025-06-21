@@ -105,7 +105,7 @@ describe("Model Validation", () => {
           `swagger "${specPath}" with operation "${operationIds}" contains passed incorrectly.`
         );
         // console.log(result)
-      } catch (err) {
+      } catch (err: any) {
         assert.strictEqual(err.code, "REQUEST_VALIDATION_ERROR");
         assert.strictEqual(err.innerErrors[0].code, "DOUBLE_FORWARD_SLASHES_IN_URL");
       }

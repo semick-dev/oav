@@ -7,7 +7,7 @@ export const getLazyBuilder = <SourceType, Key extends keyof SourceType>(
   key: Key,
   builder: (source: SourceType) => Promise<Exclude<SourceType[Key], undefined>>
 ) => {
-  const errKey = "_err_" + key;
+  const errKey = "_err_" + String(key);
   const listeners = new Map<SourceType, Array<BuilderListener<SourceType[Key]>>>();
 
   return async (source: SourceType): Promise<Exclude<SourceType[Key], undefined>> => {

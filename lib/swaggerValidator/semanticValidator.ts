@@ -141,7 +141,7 @@ export class SwaggerSemanticValidator {
       await this.validateSchemaRequiredProperties(transformCtx, swagger._filePath, errors);
 
       await this.validateOperation(swagger, errors);
-    } catch (e) {
+    } catch (e: any) {
       const errInfo = getOavErrorMeta("INTERNAL_ERROR", { message: `${e.message}\n${e.stack}` });
       errors.unshift({
         code: errInfo.code,
@@ -158,7 +158,7 @@ export class SwaggerSemanticValidator {
       const swagger = (await this.jsonLoader.load(swaggerFilePath)) as unknown as SwaggerSpec;
       swagger._filePath = swaggerFilePath;
       return swagger;
-    } catch (e) {
+    } catch (e: any) {
       if (typeof e.kind === "string") {
         const ex = e as ParseError;
         const errInfo = getOavErrorMeta("JSON_PARSING_ERROR", { details: ex.code });
@@ -219,7 +219,7 @@ export class SwaggerSemanticValidator {
               existedJsonPaths.push(jsonPath);
             }
             return !isSuppressed;
-          } catch (e) {
+          } catch (e: any) {
             let isContinue = false;
             // the jsonPathsInPayload will include non-existed path, so it needs to walk back to
             // exclude the unexisted path
@@ -303,7 +303,7 @@ export class SwaggerSemanticValidator {
       onOperation: async (operation) => {
         try {
           await this.liveValidatorLoader.getRequestValidator(operation);
-        } catch (e) {
+        } catch (e: any) {
           const info = getInfo(operation);
           errors.push({
             code: "INTERNAL_ERROR",
@@ -316,11 +316,11 @@ export class SwaggerSemanticValidator {
       onResponse: async (response, operation, _, statusCode) => {
         try {
           await this.liveValidatorLoader.getResponseValidator(response);
-        } catch (e) {
+        } catch (e: any) {
           const info = getInfo(operation);
           errors.push({
             code: "INTERNAL_ERROR",
-            message: `Failed to compile validator on operation response\n${statusCode} ${operation.operationId} ${operation._method}\n${e.message}\n${e.stack}`,
+            message: `Failed to compile validator on operation response\n${statusCode} ${operation.operationId} ${operation._method}\n${e.message}\n${e?.stack}`,
             url: spec._filePath,
             position: info?.position,
           });

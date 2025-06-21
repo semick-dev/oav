@@ -62,7 +62,7 @@ export const allOfTransformer: GlobalTransformer = {
         if (sch.allOf !== undefined) {
           transformAllOfSchema(sch, baseSchemas, jsonLoader);
         }
-      } catch (e) {
+      } catch (e: any) {
         if (logging) {
           logging(
             `Fail to transform ${sch}}. ErrorMessage:${e?.message};ErrorStack:${e?.stack}.`,
