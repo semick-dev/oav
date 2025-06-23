@@ -38,6 +38,7 @@ To that end, I have:
 ## Setup and repro of the error I'm trying to solve
 
 - `cd` into the cloned `oav` repo
+- `git checkout update-devdependencies`
 - `nvm install 20`
 - `nvm use 20`
 - `npm install`
