@@ -25,6 +25,7 @@ export const inversifyGetInstance = <T, Opt = {}>(
   if (opts.container === undefined) {
     opts.container = inversifyGetContainer(opts);
   }
+
   opts.container.bind(TYPES.opts).toConstantValue(opts);
   opts.container.bind(TYPES.emptyObject).toConstantValue({});
   const { AjvSchemaValidator } = require("./swaggerValidator/ajvSchemaValidator");
