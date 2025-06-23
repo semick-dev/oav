@@ -46,3 +46,14 @@ To that end, I have:
 - `npm run cli -- validate-example /path/to/cloned/azure-rest-api-specs/specification/schemaregistry/data-plane/Microsoft.SchemaRegistry/stable/2021-10/schemaregistry.json`
 
 You will see the error. That's what I'm trying to solve.
+
+## An explanation of the error
+
+Ok so the major issue is that `inversify` `5.X` allowed two patterns that are common throughout `oav`
+
+1. Mixed [`injectable`](lib/swaggerValidator/modelValidator.ts#L60) parameters and [non-injected](lib/swaggerValidator/modelValidator.ts#L61) parameters. Now you have to pick one or the other.
+2. Auto-bound `injectable` classes. Before, when you obtained a container of possible classes that could be injected, any class that was marked with `@injectable` decorator was automatally bound to that container for use. Now, you have to `bind` every `injectable` class that should be made _available_ to the `container`. [Here is where we create our container in 95% of usage](lib/inversifyUtils.ts#18)
+
+Unfortunately for us, we can still satisfy `2` with a couple judicious setting changes, but `1` is much more difficult. We have to either A) rip `inversify` out everywhere and simply manually bind all the constructor parameters or B) update all classes that show up in a constructor with `injected` parameters to also be `injectable`.
+
+It's a difficult choice, and one that I'm still attempting to not confront :D
